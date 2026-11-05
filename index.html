@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>STREET LEGENDS: RACING WORLD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="game-root">
+  <canvas id="game"></canvas>
+  <div id="vignette"></div>
+  <section id="main-menu" class="screen">
+    <div class="topbar"><div class="brand"><span>STREET</span> LEGENDS <small>RACING WORLD</small></div><div class="wallet"><b id="cash-top">$ 25,000</b><b id="gold-top">◆ 120</b><button id="profile-btn">DRIVER PROFILE</button></div></div>
+    <div class="hero-copy"><p class="eyebrow">THE STREETS ARE YOURS</p><h1>OWN THE<br><em>ROAD.</em></h1><p class="sub">Build your legend. Tune your machine. Leave everyone behind.</p>
+      <div class="hero-actions"><button class="primary" id="play-btn">PLAY NOW <span>▶</span></button><button class="ghost" id="garage-btn">ENTER GARAGE</button></div>
+    </div>
+    <div class="menu-bottom"><div class="mode-card active" data-mode="quick"><span>01</span><b>QUICK RACE</b><small>Race for the crown</small></div><div class="mode-card" data-mode="career"><span>02</span><b>CAREER</b><small>Rise through the leagues</small></div><div class="mode-card" data-mode="free"><span>03</span><b>FREE ROAM</b><small>Explore the city</small></div><div class="mode-card" data-mode="drift"><span>04</span><b>DRIFT ZONE</b><small>Slide for points</small></div><div class="mode-card" data-mode="time"><span>05</span><b>TIME TRIAL</b><small>Beat the clock</small></div><div class="mode-card" data-mode="drag"><span>06</span><b>DRAG STRIP</b><small>Pure acceleration</small></div></div>
+    <div class="side-links"><button id="shop-btn">CAR SHOP</button><button id="settings-btn">SETTINGS</button><button id="achievements-btn">ACHIEVEMENTS</button></div>
+  </section>
+
+  <section id="garage-screen" class="panel-screen hidden">
+    <button class="back-btn" data-back>← BACK</button><div class="panel-heading"><small>YOUR COLLECTION</small><h2>MY GARAGE</h2></div>
+    <div class="garage-info"><div><span id="garage-car-name">VORTEX GT</span><p id="garage-car-desc">Street class performance coupe</p></div><div class="stats" id="car-stats"></div></div>
+    <div class="garage-controls"><button id="prev-car">‹</button><button id="next-car">›</button><button class="primary" id="paint-btn">CHANGE PAINT</button><button id="upgrade-btn">UPGRADE ENGINE</button><button id="spoiler-btn">TOGGLE SPOILER</button><button id="select-car-btn">SELECT VEHICLE</button></div>
+    <div class="garage-footer">Use the arrows to browse your collection. Upgrades permanently improve performance.</div>
+  </section>
+
+  <section id="shop-screen" class="panel-screen hidden"><button class="back-btn" data-back>← BACK</button><div class="panel-heading"><small>MAKE IT YOURS</small><h2>CAR DEALERSHIP</h2></div><div id="shop-grid" class="shop-grid"></div></section>
+  <section id="settings-screen" class="panel-screen hidden"><button class="back-btn" data-back>← BACK</button><div class="panel-heading"><small>PERSONALIZE YOUR DRIVE</small><h2>SETTINGS</h2></div><div class="settings-card"><label>Graphics quality <select id="quality"><option>High</option><option>Medium</option><option>Low</option></select></label><label>Music volume <input id="music-volume" type="range" min="0" max="1" step=".05" value=".35"></label><label>Effects volume <input id="sfx-volume" type="range" min="0" max="1" step=".05" value=".7"></label><p>Keyboard: WASD / arrows to drive, SPACE handbrake, SHIFT nitro, C camera, ESC pause.</p></div></section>
+  <section id="achievements-screen" class="panel-screen hidden"><button class="back-btn" data-back>← BACK</button><div class="panel-heading"><small>YOUR LEGACY</small><h2>ACHIEVEMENTS</h2></div><div id="achievement-list" class="achievement-list"></div></section>
+  <section id="profile-screen" class="panel-screen hidden"><button class="back-btn" data-back>← BACK</button><div class="panel-heading"><small>DRIVER CARD</small><h2>PROFILE</h2></div><div class="settings-card"><h3>STREET ROOKIE</h3><p id="profile-data"></p></div></section>
+
+  <section id="hud" class="hidden">
+    <div class="hud-top"><div class="race-label"><small id="hud-mode">QUICK RACE</small><b id="race-status">GET READY</b></div><div class="race-position" id="position">1<small> / 4</small></div><button id="pause-btn">Ⅱ</button></div>
+    <div class="hud-bottom"><div class="speed"><strong id="speed">000</strong><span>KM/H</span><small id="gear">GEAR 1</small></div><div class="hud-center"><div class="nitro-wrap"><span>NITRO</span><div class="meter"><i id="nitro-fill"></i></div><button id="nitro-btn">N₂O</button></div><div class="race-time" id="race-time">00:00.00</div></div><div class="hud-help">WASD DRIVE<br>SPACE DRIFT · SHIFT NITRO</div></div>
+    <div class="mobile-controls"><button id="left-touch">◀</button><button id="right-touch">▶</button><button id="brake-touch">BRAKE</button><button id="gas-touch">GAS</button><button id="mobile-nitro">N₂O</button></div>
+  </section>
+  <section id="pause-screen" class="modal hidden"><div class="modal-card"><small>TAKE A BREATHER</small><h2>PAUSED</h2><button class="primary" id="resume-btn">RESUME RACE</button><button id="restart-btn">RESTART</button><button id="exit-btn">QUIT TO MENU</button></div></section>
+  <section id="result-screen" class="modal hidden"><div class="modal-card"><small>RACE COMPLETE</small><h2 id="result-title">VICTORY</h2><div id="result-stats"></div><button class="primary" id="retry-btn">RACE AGAIN</button><button id="result-menu-btn">MAIN MENU</button></div></section>
+  <div id="toast"></div>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body></html>
